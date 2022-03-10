@@ -1,0 +1,29 @@
+{
+  "name": "understanding-typescript",
+  "version": "1.0.0",
+  "description": "Understanding TypeScript Course Setup",
+  "homepage": "https://howardguoui.github.io/Typescriptpratice/",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel serve index.html",
+    "build": "cross-env NODE_ENV=production parcel build index.html --public-url .",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "keywords": [
+    "typescript",
+    "course"
+  ],
+  "author": "Hao Guo",
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "^5.2.0"
+  },
+  "dependencies": {
+    "gh-pages": "^3.2.3",
+    "lite-server": "^2.5.4",
+    "parcel-bundler": "^1.9.7"
+  }
+}
