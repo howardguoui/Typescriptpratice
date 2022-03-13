@@ -1,3 +1,31 @@
+//validation
+interface Validation {
+    value: string | number;
+    required?: boolean;// boolean or undefined
+    minlength?: number;
+    maxlength?: number;
+    min?: number;
+    max?: number;
+}
+function validate(ValidatableInput: Validation) {
+    let isValid = true;
+    if(ValidatableInput.required) {
+        isValid = isValid && ValidatableInput.value.toString().trim().length !==0
+    }
+    if(ValidatableInput.minlength !=null && typeof ValidatableInput.value ==='string') {
+        isValid = isValid && ValidatableInput.value.length > ValidatableInput.minlength
+    }
+    if(ValidatableInput.maxlength !=null && typeof ValidatableInput.value ==='string') {
+        isValid = isValid && ValidatableInput.value.length < ValidatableInput.maxlength
+    }
+    if(ValidatableInput.min !=null && typeof ValidatableInput.value ==='number') {
+        isValid = isValid && ValidatableInput.value > ValidatableInput.min
+    }
+    if(ValidatableInput.max !=null && typeof ValidatableInput.value ==='number') {
+        isValid = isValid && ValidatableInput.value < ValidatableInput.max
+    }
+    return isValid
+}
 function autobind(_: any, _2 : string, descriptor: PropertyDescriptor) {
     const originMethod = descriptor.value;
     const adjDescriptor: PropertyDescriptor = {
@@ -49,7 +77,22 @@ class ProjectInput {
         const enterTitle = this.titleElem.value;
         const enterDescriptionElem = this.descriptionElem.value;
         const enterPeopleElem = this.peopleElem.value;
-        if(enterTitle.trim().length === 0 || enterDescriptionElem.trim().length === 0|| enterPeopleElem.trim().length === 0) {
+        // if(enterTitle.trim().length === 0 || enterDescriptionElem.trim().length === 0|| enterPeopleElem.trim().length === 0) {
+        const titleValidatable: Validation = {
+            value:enterTitle,
+            required: true
+        };
+        const descritionValidatable: Validation = {
+            value:enterDescriptionElem,
+            required: true,
+            minlength: 5,
+        };
+        const peopleValidatable: Validation = {
+            value: +enterPeopleElem,
+            required: true,
+            min: 3,
+        };
+        if(!validate(titleValidatable) || !validate(descritionValidatable)|| !validate(peopleValidatable)) {
             alert('wrong')
             return;
         } else {
