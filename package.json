@@ -6,8 +6,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel serve index.html",
-    "build": "cross-env NODE_ENV=production parcel build index.html --public-url .",
+    "start": "webpack-dev-server",
+    "start2": "parcel serve index.html",
+    "build": "webpack --config webpack.config.prod.js",
+    "build2": "cross-env NODE_ENV=production parcel build index.html --public-url .",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -22,6 +24,8 @@
     "cross-env": "^5.2.0"
   },
   "dependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "ts-loader": "^6.2.1",
     "gh-pages": "^3.2.3",
     "lite-server": "^2.5.4",
     "parcel-bundler": "^1.9.7",
